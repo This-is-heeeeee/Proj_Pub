@@ -62,6 +62,26 @@ public class tableButton extends JButton{
 		setOpaque(true);
 	}
 	
-	
+	public void setInfo(int pnum, String tmode) {
+		this.pnum = pnum;
+		this.tmode = tmode;
+		pLabel.setText(Integer.toString(pnum));
+		switch(tmode) {
+		case "x":
+			setBackground(Color.gray);
+			break;
+		case "여":
+			setBackground(Color.pink);
+			break;
+		case "남":
+			setBackground(Color.blue);
+			break;
+		case "혼":
+			setBackground(Color.GREEN);
+			break;
+		default :
+			break;
+		}
+	}
 
 }

@@ -1,5 +1,6 @@
 package UI;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,7 @@ import javax.swing.JLabel;
 
 import model.CorderDAO;
 import model.CorderVO;
+import model.CustomerDAO;
 import model.MenuDAO;
 import model.MenuVO;
 import model.PriceDAO;
@@ -24,17 +26,21 @@ public class myListener implements ActionListener{
 	CorderDAO orderdao;
 	MenuDAO menudao;
 	PriceDAO pricedao;
+	CustomerDAO customerdao;
 	ArrayList<CorderVO> orderdatas;
 	MenuVO menudata;
 	PriceVO pricedata;
+	int selectedTable;
 	
 	myListener(tableButton tbtn, printPanel txtArea){
 		btn = tbtn;
 		myArea = txtArea;
+		selectedTable = btn.tnum;
 		
 		orderdao = new CorderDAO();
 		pricedao = new PriceDAO();
 		menudao = new MenuDAO();
+		customerdao = new CustomerDAO();
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -61,8 +67,17 @@ public class myListener implements ActionListener{
 					}
 					myArea.txt.append("\ntotal :\t\t" + pricedata.getTotal() + "\n");
 				}
+				myArea.btn.addActionListener(this);
 				break;
 			}
+		}
+		else if(obj == myArea.btn) {
+			myArea.txt.setText("");
+			customerdao.initCustomer(selectedTable);
+			pricedao.initPrice(selectedTable);
+			orderdao.initCorder(selectedTable);
+			btn.setInfo(0, "x");
+			
 		}
 		
 	}

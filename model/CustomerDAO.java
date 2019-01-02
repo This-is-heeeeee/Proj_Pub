@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import server.s2;
+
 public class CustomerDAO {
 	String url = "jdbc:mysql://localhost:3306/ProjectDB?characterEncoding=UTF-8&serverTimezone=UTC";
 	String userName = "root";
@@ -69,6 +71,31 @@ public class CustomerDAO {
 		return customer;
 	}
 	
+	public ArrayList<CustomerVO> selectAll(){
+		connectDB();
+		s2 s2;
+		sql = "select * from Customer";
+		
+		ArrayList<CustomerVO> customerlist = new ArrayList<CustomerVO>();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				CustomerVO c = new CustomerVO();
+				c.settNum(rs.getInt("tNum"));
+				c.setNumofpeo(rs.getInt("numofpe"));
+				c.setSex(rs.getString("sex"));
+				customerlist.add(c);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return customerlist;
+	}
+	
 	public boolean updateCustomer(CustomerVO customer) {
 		connectDB();
 		
@@ -91,5 +118,23 @@ public class CustomerDAO {
 		}
 		
 	}
+	public void initCustomer(int tnum) {
+		connectDB();
+		
+		sql = "update Customer set numofpe = ?, sex = ? where tNum = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, 0);
+			pstmt.setString(2, "x");
+			pstmt.setInt(3, tnum);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		closeDB();
+	}
+	
 
 }

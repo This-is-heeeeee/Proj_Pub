@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class CorderDAO {
 	String url = "jdbc:mysql://localhost:3306/ProjectDB?characterEncoding=UTF-8&serverTimezone=UTC";
@@ -42,6 +43,32 @@ public class CorderDAO {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<CorderVO> selectAllr(){
+		connectDB();
+		sql = "select * from Corder";
+		
+		ArrayList<CorderVO> orderList = new ArrayList<CorderVO>();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				CorderVO corder = new CorderVO();
+				corder.setoNum(rs.getInt("oNum"));
+				corder.settNum(rs.getInt("tNum"));
+				corder.setProduct(rs.getString("product"));
+				corder.setAmount(rs.getInt("amount"));
+				orderList.add(corder);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		closeDB();
+		return orderList;
 	}
 	
 	public ArrayList<CorderVO> selectCorder(int tnum){
@@ -91,5 +118,20 @@ public class CorderDAO {
 			return false;
 		}
 		
+	}
+	
+	public void initCorder(int tnum) {
+		connectDB();
+		sql = "delete from Corder where tNum = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, tnum);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		closeDB();
 	}
 }

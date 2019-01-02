@@ -1,6 +1,8 @@
 package model;
 
-public class CorderVO {
+import java.io.Serializable;
+
+public class CorderVO implements Serializable{
 	int oNum;
 	int tNum;
 	String product;

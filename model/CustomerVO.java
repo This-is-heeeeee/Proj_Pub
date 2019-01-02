@@ -1,6 +1,8 @@
 package model;
 
-public class CustomerVO {
+import java.io.Serializable;
+
+public class CustomerVO implements Serializable{
 	int tNum;
 	int numofpeo;
 	String sex;

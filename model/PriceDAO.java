@@ -68,20 +68,35 @@ public class PriceDAO {
 		return price;
 	}
 	
-	public boolean insertPrice(PriceVO price) {
-		sql = "insert into Customer values(?,?)";
+	public void updatePrice(int tnum, int total) {
+		connectDB();
+		sql = "update Price set total = ? where tNum = ?";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, price.gettNum());
-			pstmt.setInt(2, price.getTotal());
+			pstmt.setInt(1, total);
+			pstmt.setInt(2, tnum);
 			pstmt.executeUpdate();
-			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return false;
 		}
+		closeDB();
+	}
+
+	public void initPrice(int tnum) {
+		connectDB();
+		sql = "update Price set total = ? where tNum = ?";
 		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, 0);
+			pstmt.setInt(2, tnum);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		closeDB();
 	}
 }
