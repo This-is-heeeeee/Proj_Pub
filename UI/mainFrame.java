@@ -5,6 +5,7 @@ import java.awt.Container;
 import javax.swing.JFrame;
 
 import model.CustomerDAO;
+import server.MutiChatServer;
 import server.s1;
 import server.s2;
 
@@ -51,8 +52,7 @@ public class mainFrame extends JFrame{
 		new mainFrame();
 		new s1(myTable).start();
 		new s2().start();
-		//CustomerDAO cdao = new CustomerDAO();
-		//cdao.selectAll();
+		new MutiChatServer().start();
 	}
 
 }

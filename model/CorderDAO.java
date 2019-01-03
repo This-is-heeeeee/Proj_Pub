@@ -45,7 +45,7 @@ public class CorderDAO {
 		}
 	}
 	
-	public ArrayList<CorderVO> selectAllr(){
+	public ArrayList<CorderVO> selectAll(){
 		connectDB();
 		sql = "select * from Corder";
 		
@@ -133,5 +133,25 @@ public class CorderDAO {
 			e.printStackTrace();
 		}
 		closeDB();
+	}
+	
+	public int getMaxOnum() {
+		connectDB();
+		sql = "select MAX(oNum) from Corder";
+		
+		int max = 0;
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			max = rs.getInt("MAX(oNum)");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		closeDB();
+		return max;
 	}
 }

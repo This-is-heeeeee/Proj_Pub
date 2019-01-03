@@ -31,7 +31,7 @@ public class s1 extends Thread{
 			e.printStackTrace();
 		}
 		System.out.println("order정보를 받아옵니다.");
-		onum = 0;////////////마지막 번호 다음번호로 고치기
+		onum = orderdao.getMaxOnum()+1;
 	}
 	
 	public void run() {
@@ -45,16 +45,22 @@ public class s1 extends Thread{
 			
 			orderlist = (ArrayList<CorderVO>)ois.readObject();
 			
-			total = 0;
-			
 			for(CorderVO o : orderlist) {
 				o.setoNum(onum);
 				orderdao.insertCorder(o);
 				onum++;
 				MenuVO menu;
 				menu = menudao.selectMenu(o.getProduct());
-				total += menu.getPrice() * o.getAmount();
 				tnum = o.gettNum();
+			}
+			
+			total = 0;
+			
+			orderlist = orderdao.selectCorder(tnum);
+			for(CorderVO o : orderlist) {
+				MenuVO menu;
+				menu = menudao.selectMenu(o.getProduct());
+				total += menu.getPrice() * o.getAmount();
 			}
 			
 			pricedao.updatePrice(tnum, total);

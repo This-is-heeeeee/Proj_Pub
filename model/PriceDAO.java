@@ -44,11 +44,11 @@ public class PriceDAO {
 		}
 	}
 	
-	public PriceVO selectPrice(int tnum){
+	public int selectPrice(int tnum){
 		connectDB();
-		sql = "select * from Price where tNum = ?";
+		sql = "select total from Price where tNum = ?";
 		
-		PriceVO price = null;
+		int price = 0;
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -56,9 +56,9 @@ public class PriceDAO {
 			rs = pstmt.executeQuery();
 			
 			rs.next();
-			price = new PriceVO();
-			price.settNum(rs.getInt("tNum"));
-			price.setTotal(rs.getInt("total"));
+
+			
+			price = rs.getInt("total");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -29,7 +29,7 @@ public class myListener implements ActionListener{
 	CustomerDAO customerdao;
 	ArrayList<CorderVO> orderdatas;
 	MenuVO menudata;
-	PriceVO pricedata;
+	int pricedata;
 	int selectedTable;
 	
 	myListener(tableButton tbtn, printPanel txtArea){
@@ -65,7 +65,12 @@ public class myListener implements ActionListener{
 						sb.append(menudata.getPrice() + "\n");
 						myArea.txt.append(sb.toString());
 					}
-					myArea.txt.append("\ntotal :\t\t" + pricedata.getTotal() + "\n");
+					myArea.txt.append("\ntotal :\t\t" + pricedata + "\n");
+				}
+				if(myArea.btn.getActionListeners().length > 0) {
+					for(ActionListener g : myArea.btn.getActionListeners()) {
+						myArea.btn.removeActionListener(g);
+					}
 				}
 				myArea.btn.addActionListener(this);
 				break;

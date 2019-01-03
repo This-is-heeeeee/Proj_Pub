@@ -11,15 +11,20 @@ import model.*;
 public class s2 extends Thread{
 	CustomerDAO datas;
 	ArrayList<CustomerVO> customerlist;
-	
+	ServerSocket sc;
 	public s2() {
-		
+		try {
+			sc  = new ServerSocket(5000);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void run() {
 		while(true) {
 		try {
-			ServerSocket sc = new ServerSocket(5000);
+			
 			System.out.println("table을 보냅니다.");
 			Socket s = sc.accept();
 			
@@ -33,7 +38,6 @@ public class s2 extends Thread{
 			
 			os.close();
 			oos.close();
-			sc.close();
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
