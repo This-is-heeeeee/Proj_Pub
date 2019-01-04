@@ -11,10 +11,10 @@ import server.s2;
 
 public class mainFrame extends JFrame{
 	titlePanel myTitle;
-	static infoPanel myTable;
+	public static infoPanel myTable;
 	printPanel myArea;
 	
-	mainFrame(){
+	public mainFrame(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("P.O.S");
 		Container c = getContentPane();
@@ -47,12 +47,12 @@ public class mainFrame extends JFrame{
 
 		setVisible(true);
 	}
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new mainFrame();
 		new s1(myTable).start();
 		new s2().start();
 		new MutiChatServer().start();
-	}
+	}*/
 
 }
