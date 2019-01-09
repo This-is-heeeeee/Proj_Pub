@@ -29,7 +29,7 @@ public class myDialog{
 	CustomerVO customer;
 	CustomerDAO cdao;
 	
-	myDialog(tableButton btn){
+	public myDialog(tableButton btn){
 		dialog = new JDialog();
 		
         dialog.setLayout(new FlowLayout());

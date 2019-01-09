@@ -1,6 +1,7 @@
 package UI;
 
 import java.awt.Container;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
@@ -12,7 +13,7 @@ import server.s2;
 public class mainFrame extends JFrame{
 	titlePanel myTitle;
 	public static infoPanel myTable;
-	printPanel myArea;
+	public printPanel myArea;
 	
 	public mainFrame(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,23 +37,23 @@ public class mainFrame extends JFrame{
 		myArea.setSize(300,300);
 		myArea.setLocation(this.getSize().width*43/80,this.getSize().height*1/5);
 		
-		for(int i = 0; i < 12; i++) {
+		/*for(int i = 0; i < 12; i++) {
 			myTable.tbtn[i].addActionListener(new myListener(myTable.tbtn[i], myArea));
-		}
+		}*/
 		
 		c.add(myTitle);
 		c.add(myTable);
 		c.add(myArea);
 		
-
 		setVisible(true);
 	}
-	/*public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new mainFrame();
-		new s1(myTable).start();
-		new s2().start();
-		new MutiChatServer().start();
-	}*/
+	
+	public void addButtonActionListener(ActionListener listener) {
+		
+		for(int i = 0; i < 12; i++) {
+			myTable.tbtn[i].addActionListener(listener);
+		}
+		myArea.btn.addActionListener(listener);
+	}
 
 }

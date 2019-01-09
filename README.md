@@ -1,13 +1,21 @@
-# Pub_P.O.S
+# Pub_Manager_Owner
 
 ## Model
     
-    - 
+    - appModel
     
-## UI
+## View(UI)
 
-    - 
+    - mainFrame
 
-## server
+## Controller
 
-    -
+    - appMain
+    
+## Server
+
+    - MultiChatServer
+    
+    - s1
+    
+    - s2

@@ -83,5 +83,12 @@ public class tableButton extends JButton{
 			break;
 		}
 	}
+	
+	public String getTmode() {
+		return tmode;
+	}
 
+	public int getTnum() {
+		return tnum;
+	}
 }
